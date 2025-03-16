@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.act_3_arc"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.act_3_arc"
