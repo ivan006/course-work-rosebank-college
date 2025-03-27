@@ -12,29 +12,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        
 
-        // Generate random number between 1 and 100
-        var secretNumber = Random.nextInt(1, 101)
 
-        val submitButton = findViewById<Button>(R.id.submitButton)
-        val numberInput = findViewById<EditText>(R.id.numberInput)
-        val resultOutput = findViewById<TextView>(R.id.resultOutput)
+        val yearInput = findViewById<EditText>(R.id.numberInput)
+        val checkButton = findViewById<Button>(R.id.submitButton)
+        val resultText = findViewById<TextView>(R.id.resultOutput)
 
-        submitButton?.setOnClickListener {
-            val userGuess = numberInput.text.toString().toIntOrNull()
-            var message = ""
+        checkButton.setOnClickListener {
+            val year = yearInput.text.toString().toIntOrNull()
 
-            if (userGuess == null) {
-                message = "Please enter a valid number."
-            } else if (userGuess < secretNumber) {
-                message = "Too low! Try again."
-            } else if (userGuess > secretNumber) {
-                message = "Too high! Try again."
-            } else {
-                message = "Correct! Well done!"
+            val generation = when (year) {
+                in 1901..1927 -> "Greatest Generation"
+                in 1928..1945 -> "Silent Generation"
+                in 1946..1964 -> "Baby Boomers"
+                in 1965..1980 -> "Generation X"
+                in 1981..1996 -> "Millennials"
+                in 1997..2012 -> "Generation Z"
+                in 2013..2025 -> "Generation Alpha"
+                else -> "Unknown Generation"
             }
 
-            resultOutput.text = message
+            resultText.text = "You belong to: $generation"
         }
     }
 }
