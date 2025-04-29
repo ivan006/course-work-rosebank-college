@@ -1,5 +1,6 @@
 package com.example.a4_2_mm
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -13,23 +14,17 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        val clickMeButton = findViewById<Button>(R.id.button)
-
-
         val welcomeTextView = findViewById<TextView>(R.id.textView)
         val nameEditText = findViewById<EditText>(R.id.editTextText)
 
 
-        clickMeButton?.setOnClickListener {
-            var greeting: String = ""
 
-
-            greeting = "Welcome, ${nameEditText.text}"
-            welcomeTextView.text = greeting
-
-
-
-
+        val multiplyButton = findViewById<Button>(R.id.button)
+        multiplyButton.setOnClickListener {
+            // create the explicit intent
+            val intent = Intent(this, MultiplicationTable::class.java)
+            // start the activity
+            startActivity(intent)
         }
     }
 }
