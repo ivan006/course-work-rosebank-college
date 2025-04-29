@@ -12,18 +12,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         val welcomeTextView = findViewById<TextView>(R.id.textView)
-        val nameEditText = findViewById<EditText>(R.id.editTextText)
-
-
 
         val multiplyButton = findViewById<Button>(R.id.button)
+        val tableNumberEditText = findViewById<EditText>(R.id.editTextNumber)
+
         multiplyButton.setOnClickListener {
             // create the explicit intent
             val intent = Intent(this, MultiplicationTable::class.java)
-            // start the activity
+
+            // add the table number to the intent
+            intent.putExtra("tableNumber", tableNumberEditText.text.toString())
+
+            // start your next activity
             startActivity(intent)
         }
     }
