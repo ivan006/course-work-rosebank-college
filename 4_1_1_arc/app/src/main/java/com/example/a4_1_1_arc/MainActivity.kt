@@ -25,6 +25,6 @@ class MainActivity : AppCompatActivity() {
             i++
         }
 
-        artView.text = art
+        artView.text = getString(R.string.app_name)
     }
 }
