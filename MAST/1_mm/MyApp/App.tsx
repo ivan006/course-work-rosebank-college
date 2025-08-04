@@ -1,41 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './HomeScreen';
+import DetailsScreen from './DetailsScreen';
 
+
+const Stack = createNativeStackNavigator();
 export default function App() {
-
-  const [name, setName] = useState('');
   
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello</Text>
-      <Text>Welcome to my app...</Text>
-      <Image
-        source={require('./assets/icon.png')}
-        style={{ width: 100, height: 100 }}
-      />
-      <Text>{name}</Text>
-      <TextInput
-        placeholder="Enter your name"
-        value={name}
-        onChangeText={text => setName(text)}
-      />
-      <Button
-        title="Say Hello"
-        onPress={() => alert('Hello, ' + name)}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 30,
-  },
-});
+
+
