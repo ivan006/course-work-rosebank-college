@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({navigation}: {navigation: any}) {
 
   
   return (
