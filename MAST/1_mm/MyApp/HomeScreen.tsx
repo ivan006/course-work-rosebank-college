@@ -1,19 +1,11 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+
+import React from 'react';
 import { Button, Text, View } from 'react-native';
 
-// Define your navigation stack's structure
-type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
-};
+export default function HomeScreen({ navigation }) {
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Home'>;
-
-type Props = {
-  navigation: HomeScreenNavigationProp;
-};
-
-export default function HomeScreen({ navigation }: Props) {
+  
   return (
     <View>
       <Text>This is Home</Text>
@@ -25,3 +17,6 @@ export default function HomeScreen({ navigation }: Props) {
     </View>
   );
 }
+
+
+
