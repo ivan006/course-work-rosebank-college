@@ -5,9 +5,9 @@ import { Text } from 'react-native-paper';
 type QWrapperProps = {
   title: string;
   subtitle?: string;
-  imageSource?: any;          // require('./assets/hero.jpg') or { uri: '...' }
+  imageSource?: any;
   children: ReactNode;
-  heroHeight?: number;        // optional override (px)
+  heroHeight?: number;
 };
 
 export default function QWrapper({
@@ -20,40 +20,30 @@ export default function QWrapper({
   const { width } = useWindowDimensions();
   const isDesktop = Platform.OS === 'web' && width >= 768;
 
-  // sensible default hero heights
   const height = heroHeight ?? (isDesktop ? 260 : 180);
 
   const HeroContent = (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
-      <View
-        style={{
-          alignSelf: 'flex-start',
-          marginLeft: 20,
-          paddingVertical: 6,
-          paddingHorizontal: 12,
-          backgroundColor: 'rgba(255,255,255,0.9)',
-          borderRadius: 6,
-        }}
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'flex-end', // ✅ Push text to bottom
+        paddingHorizontal: 20,
+        paddingBottom: 20, // space from bottom edge
+      }}
+    >
+      <Text
+        variant={isDesktop ? 'headlineMedium' : 'titleLarge'}
+        style={{ fontWeight: '700', color: 'white' }}
       >
-        <Text variant={isDesktop ? 'headlineSmall' : 'titleMedium'} style={{ fontWeight: '700' }}>
-          {title}
-        </Text>
-      </View>
-
+        {title}
+      </Text>
       {subtitle ? (
-        <View
-          style={{
-            alignSelf: 'flex-start',
-            marginTop: 8,
-            marginLeft: 20,
-            paddingVertical: 4,
-            paddingHorizontal: 10,
-            backgroundColor: 'rgba(255,255,255,0.85)',
-            borderRadius: 6,
-          }}
+        <Text
+          variant="titleSmall"
+          style={{ color: 'white', marginTop: 4 }}
         >
-          <Text variant="bodyMedium">{subtitle}</Text>
-        </View>
+          {subtitle}
+        </Text>
       ) : null}
     </View>
   );
@@ -66,19 +56,22 @@ export default function QWrapper({
           source={imageSource}
           resizeMode="cover"
           style={{ width: '100%', height }}
-          imageStyle={{}}
         >
-          {/* subtle dark overlay for readability */}
-          <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.15)' }}>
+          {/* Dark overlay for contrast */}
+          <View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.3)' }}>
             {HeroContent}
           </View>
         </ImageBackground>
       ) : (
-        <View style={{ width: '100%', height, backgroundColor: '#eee' }}>{HeroContent}</View>
+        <View style={{ width: '100%', height, backgroundColor: '#ccc' }}>
+          {HeroContent}
+        </View>
       )}
 
       {/* PAGE BODY */}
-      <View style={{ paddingHorizontal: 20, paddingVertical: 24 }}>{children}</View>
+      <View style={{ paddingHorizontal: 20, paddingVertical: 24 }}>
+        {children}
+      </View>
     </View>
   );
 }

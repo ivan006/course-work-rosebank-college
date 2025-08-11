@@ -16,7 +16,7 @@ export default function HomeScreen({ navigation }: { navigation: any }) {
 
   return (
     <QWrapper
-      title="Heading Here"
+      title="Ivan's app"
       subtitle="Subheading goes here"
       imageSource={require('./assets/icon.png')}   // add your hero image
     >
@@ -29,6 +29,11 @@ export default function HomeScreen({ navigation }: { navigation: any }) {
           gap: 16,
         }}
       >
+        
+      <Text variant="titleLarge">Welcome!</Text>
+      <Button mode="contained" onPress={() => navigation.navigate('Details')}>
+        Go to Details
+      </Button>
         {products.map((p) => (
           <Card key={p.id} style={{ width: isDesktop ? '48%' : '100%' }}>
             <Card.Title title={p.title} />
