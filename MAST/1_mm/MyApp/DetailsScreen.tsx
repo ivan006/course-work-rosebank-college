@@ -1,41 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
+import * as React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, Button } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
+import { Provider as PaperProvider, Text, TextInput, Button, Avatar, Card } from 'react-native-paper';
 
 export default function App() {
-
   const [name, setName] = useState('');
-  
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Hello</Text>
-      <Text>Welcome to my app...</Text>
-      <Image
-        source={require('./assets/icon.png')}
-        style={{ width: 100, height: 100 }}
-      />
-      <Text>{name}</Text>
-      <TextInput
-        placeholder="Enter your name"
-        value={name}
-        onChangeText={text => setName(text)}
-      />
-      <Button
-        title="Say Hello"
-        onPress={() => alert('Hello, ' + name)}
-      />
-    </View>
+    <PaperProvider>
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <View style={{ flex: 1, justifyContent: 'center', padding: 24 }}>
+          <Card mode="elevated" style={{ padding: 16 }}>
+            <View style={{ alignItems: 'center', gap: 12 }}>
+              <Avatar.Image size={84} source={require('./assets/icon.png')} />
+              <Text variant="headlineSmall">Hello</Text>
+              <Text>Welcome to my app…</Text>
+
+              <Text variant="titleSmall">{name ? `You typed: ${name}` : ''}</Text>
+
+              <TextInput
+                mode="outlined"
+                label="Enter your name"
+                value={name}
+                onChangeText={setName}
+                style={{ width: '100%' }}
+              />
+
+              <Button mode="contained" onPress={() => alert(`Hello, ${name || 'there'}`)}>
+                Say Hello
+              </Button>
+            </View>
+          </Card>
+        </View>
+      </SafeAreaView>
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 30,
-  },
-});
