@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, useWindowDimensions, Platform } from 'react-native';
 import { Button, Text, Card } from 'react-native-paper';
+import QWrapper from './QWrapper';
 
 const products = [
   { id: 1, title: 'Product A', description: 'This is product A' },
@@ -11,41 +12,35 @@ const products = [
 
 export default function HomeScreen({ navigation }: { navigation: any }) {
   const { width } = useWindowDimensions();
-  const isDesktop = Platform.OS === 'web' && width > 768;
+  const isDesktop = Platform.OS === 'web' && width >= 768;
 
   return (
-    <View style={{ padding: 20 }}>
-      <Text variant="titleLarge">Welcome!</Text>
-      <Button mode="contained" onPress={() => navigation.navigate('Details')}>
-        Go to Details
-      </Button>
-
+    <QWrapper
+      title="Heading Here"
+      subtitle="Subheading goes here"
+      imageSource={require('./assets/icon.png')}   // add your hero image
+    >
+      {/* everything here becomes the page content under the hero */}
       <View
         style={{
           flexDirection: 'row',
           flexWrap: 'wrap',
           justifyContent: isDesktop ? 'space-between' : 'center',
-          marginTop: 24,
+          gap: 16,
         }}
       >
-        {products.map((product) => (
-          <Card
-            key={product.id}
-            style={{
-              width: isDesktop ? '48%' : '100%',
-              marginBottom: 16,
-            }}
-          >
-            <Card.Title title={product.title} />
+        {products.map((p) => (
+          <Card key={p.id} style={{ width: isDesktop ? '48%' : '100%' }}>
+            <Card.Title title={p.title} />
             <Card.Content>
-              <Text>{product.description}</Text>
+              <Text>{p.description}</Text>
             </Card.Content>
             <Card.Actions>
-              <Button>View</Button>
+              <Button onPress={() => navigation.navigate('Details')}>View</Button>
             </Card.Actions>
           </Card>
         ))}
       </View>
-    </View>
+    </QWrapper>
   );
 }
